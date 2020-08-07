@@ -291,7 +291,7 @@
 
             <ul class="nav navbar-nav">
 
-                <li class="return_up_level" data-type="return"> <i class="fa fa-chevron-left" style="margin-right: 5px;vertical-align: middle;"></i><span onclick="returnsys()">返回</span> </li>
+                <li class="return_up_level" data-type="return"> <i class="fa fa-chevron-left" style="margin-right: 5px;vertical-align: middle;"></i><span onclick="returnindex()">返回</span> </li>
 
             </ul>
 
@@ -25491,23 +25491,11 @@
     //图片层end
 
     function returnindex(){
-
-        if(confirm('是否保存当前页面？')){
-
-            $(".btn-save").click();
-
-            setTimeout(function(){
-
-                window.location.href='index.php?c=site&a=entry&op=moban&cateid=59&do=Diy&m=sudu8_page';
-
-            },1500)
-
-        }else{
-
-            window.location.href='index.php?c=site&a=entry&op=moban&cateid=59&do=Diy&m=sudu8_page';
-
-        }
-
+        layer.confirm('是否保存页面?',function() {
+            $(".save-page").click()
+        },function() {
+            location.href = '/index.html'
+        })
     }
 
     function footmenus(){

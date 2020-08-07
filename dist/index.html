@@ -719,7 +719,7 @@
 					}
 
 					function del_moban(i){
-						if(confirm('该删除操作不可逆，请谨慎操作?')){
+						var layer_id = layer.confirm('是否确定删除？',function() {
 							$.ajax({
 								url:"/api/enterprise/collegeDecoration/deleteMicroPage",
 								type:"DELETE",
@@ -731,16 +731,12 @@
 								}),
 								success:function(res){
 									if(res.status == 200) {
-										alert("模板删除成功");
+										layer.msg('删除页面成功!')
+										listMicroPage()
 									}
-									// if(res == 1){
-									// 	window.location.href = "/index/diypage/moban.html?appletid=56";
-									// }else{
-									// 	alert("模板删除失败");
-									// }
 								}
 							});
-						}
+						})
 					}
 
 					function del_sys_moban(i){
@@ -785,8 +781,6 @@
 
 						}
 					}
-
-
 					$(".model_box_alls").hover(function (){
 						$(this).find(".icon-x-guanbi1").show();
 					},function (){
@@ -882,25 +876,26 @@
 	<script>
 		var tpl = "./diypage/resource/js/app/tpl.js";
 		var pagelistContainer = $('#page-list')
-		require([tpl],function(tpl) {
-			$.get('/api/enterprise/collegeDecoration/listMicroPage',{
-				managerType:0,
-				type:1,
-			},function(res){
-				console.log(res,'res')
-				if(res.status == 200) {
-					res.data.rows.forEach(function(item) {
-						console.log(item)
-						var html = tpl('tpl_show_pageitem', item);
-						console.log(html)
-						pagelistContainer.append(html)
-					})
-				}
+		function listMicroPage() {
+			require([tpl],function(tpl) {
+				pagelistContainer.html('')
+				$.get('/api/enterprise/collegeDecoration/listMicroPage',{
+					managerType:0,
+					type:1,
+				},function(res){
+					if(res.status == 200) {
+						res.data.rows.forEach(function(item) {
+							console.log(item)
+							var html = tpl('tpl_show_pageitem', item);
+							console.log(html)
+							
+							pagelistContainer.append(html)
+						})
+					}
+				})
 			})
-		})
-		
-	</script>
-	<script>
+		}
+		listMicroPage()
 		var path ="1";
 		$("body").delegate(".commonchangepic", "click",function(){
 			var type =  $(this).data('type');
