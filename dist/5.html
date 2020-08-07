@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>
+			</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="always" name="referrer" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+	<link href="/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/clockface.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/timepicker.css" />
+
+	<!--<link rel="stylesheet" type="text/css" href="/css/colorpicker.css" />-->
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/datetimepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/multi-select-metro.css" />
+
+	<link href="/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="/webuploader/css/webuploader.css" />
+
+	<link href="/css/wnmh.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/new_icon.css" rel="stylesheet" type="text/css"/>
+
+	<link href="/css/web-icons/web-icons.css" rel="stylesheet" type="text/css"/>
+
+	<script src="/js/jquery.js" type="text/javascript"></script>
+
+	<script src="/js/clipboard.min.js" type="text/javascript"></script>
+
+</head>
+
+
+<body class="page-header-fixed">
+
+<div class="page-container">
+	<link rel="stylesheet" href="/css/index.css">
+	<link rel="stylesheet" href="/css/web-icons/web-icons.css">
+	<style>
+		ul {
+			margin: 0;
+		}
+
+		.sidebar-content {
+			height: inherit !important;
+		}
+
+		.btncolor {
+			background: #ffffff;
+			color: #333333;
+			border: 1px solid #e7e7e7;
+		}
+
+		.aside1 {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			overflow: hidden;
+			width: 60px;
+			height: 100%;
+		}
+
+		.aside1_nav {
+			position: fixed;
+			top: 60px;
+			left: 0;
+			width: 60px;
+			bottom: 0;
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+
+		.aside1_nav::-webkit-scrollbar {
+			display: none;
+		}
+		.username{
+			margin-left:10px;
+		}
+		/*device-width: >= 1000px*/
+		@media screen and (min-width: 1000px) {
+			.aside1_nav {
+				position: fixed;
+				top: 60px;
+				left: 0;
+				width: 60px;
+				bottom: 0;
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+		}
+		/*device-width:400px-1000px*/
+		@media screen and (min-width: 400px) and (max-width: 1000px) {
+
+		}
+	</style>
+
+	<div class="contentbox">
+		<!--主体头start-->
+
+		<div class="page_main">
+			<div class="content_head clearfix navbar content_head_title" style="border-bottom:1px solid #eee;">
+				<div class="content_head_left"></div>
+			</div>
+			<div class="page_content" id="container">
+
+				<link rel="stylesheet" href="/fonts/font_626828_yt6kvjqucs.css">
+				<input type="hidden" id="nowhtml" value="navDIY" class="navDIY4">
+
+				<style type="text/css">
+					table{
+						font-size: 14px;
+					}
+					.chongdingy{
+						background-color: #f9f9f9;
+						padding: 10px 0;
+						border-radius: 5px;
+					}
+					.chongdingywz{
+						text-align: left !important;
+						font-size: 16px;
+						padding-left: 20px;
+					}
+					.iconfont{
+						font-size: 30px
+					}
+					.form_nobg{
+						background-color: #fff;
+						position: fixed;
+						bottom: 0;
+						left: 216px;
+						right: 0;
+						height: 52px;
+						line-height: 52px;
+						box-shadow:0px 1px 8px 0px rgba(0, 0, 0, 0.08);
+						text-align: center;
+						padding: 0 !important;
+						margin: 0 !important;
+						z-index: 1000;
+					}
+				</style>
+				<div class="row-fluid">
+					<div class="portlet box">
+						<div class="portlet-body form" style="margin-bottom:40px;">
+							<form action="/index/usercenter/save.html?appletid=56" id="form_sample_2" class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit = "return checkinfo();">
+								<div class="control-group chongdingy">
+									<label class="control-label chongdingywz">个人中心功能配置</label>
+								</div>
+								<style>
+									table td{padding:10px}
+									table td.biaotou{font-weight: bold}
+									table img{width:34px;}
+									.px{width:100px;}
+								</style>
+								<div style="padding:10px">
+									<table cellpadding="0" cellspacing="0" style="border:1px solid #dedede" border="1px" width="100%" id="tabb"><tbody>
+									<tr>
+										<td class="biaotou">菜单名称</td>
+										<td class="biaotou">排序</td>
+										<td class="biaotou">图标</td>
+										<td class="biaotou">显示名称（最多输入6个字）</td>
+										<td class="biaotou">是否启用</td>
+									</tr>
+									<tr>
+										<td class="tds">分销中心</td>
+										<input type="hidden" name="img1" value="https://www.ac-china.cn/image/nifx.png">
+										<input type="hidden" name="url1" value="/pagesFenxiao/fenxiao_center/fenxiao_center">
+										<td class="tds px"><input type="text" name="num1" value="1"></td>
+										<input type="hidden" name="icon1" value="icon-x-fenxiao2">
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-fenxiao2"></div>
+										</td>
+
+										<td class="tds "><input type="text" maxlength="6" name="title1" value="分销中心"></td>
+										<td class="tds">
+											<input type="radio" class="control-label" name="flag1" value="1" />不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" class="control-label" name="flag1" value="2" checked="checked"/>启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">签到中心</td>
+										<input type="hidden" name="img2" value="https://www.ac-china.cn/image/niqd.png">
+										<input type="hidden" name="url2" value="/pagesSign/index/index">
+										<input type="hidden" name="icon2" value="icon-x-qiandao2">
+										<td class="tds"><input type="text" name="num2" value="2"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-qiandao2"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title2" value="签到中心"></td>
+										<td class="tds">
+											<input type="radio" name="flag2" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag2" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">积分兑换中心</td>
+										<input type="hidden" name="img3" value="https://www.ac-china.cn/image/nijf.png">
+										<input type="hidden" name="url3" value="/pagesExchange/list/list">
+										<input type="hidden" name="icon3" value="icon-x-jifen">
+										<td class="tds"><input type="text" name="num3" value="3"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-jifen"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title3" value="积分兑换中心"></td>
+										<td class="tds">
+											<input type="radio" name="flag3" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;" ></span>
+											<input type="radio" name="flag3" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">我的餐饮订单</td>
+										<input type="hidden" name="img4" value="https://www.ac-china.cn/image/nicy.png">
+										<input type="hidden" name="url4" value="/pagesFood/food_my/food_my">
+										<input type="hidden" name="icon4" value="icon-x-diancan">
+										<td class="tds"><input type="text" name="num4" value="4"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-diancan"></div>
+										</td>
+										<td class="tds"><input type="text" name="title4" value="我的餐饮订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag4" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag4" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">我的订单</td>
+										<input type="hidden" name="img5" value="https://www.ac-china.cn/image/nidd.png">
+										<input type="hidden" name="url5" value="/pages/order_more_list/order_more_list">
+										<input type="hidden" name="icon5" value="icon-x-gouwu">
+										<td class="tds"><input type="text" name="num5" value="5"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-gouwu"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title5" value="我的订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag5" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag5" class="control-label" value="2" />启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">文章付费订单</td>
+										<input type="hidden" name="img6" value="https://www.ac-china.cn/image/nisp.png">
+										<input type="hidden" name="url6" value="/pages/order_art/order_art">
+										<input type="hidden" name="icon6" value="icon-x-shipin">
+										<td class="tds"><input type="text" name="num6" value="6"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-shipin"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title6" value="我的付费视频"></td>
+										<td class="tds">
+											<input type="radio" name="flag6" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag6" class="control-label" value="2" />启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">我的优惠券</td>
+										<input type="hidden" name="img7" value="https://www.ac-china.cn/image/niyh.png">
+										<input type="hidden" name="url7" value="/pages/mycoupon/mycoupon">
+										<input type="hidden" name="icon7" value="icon-x-youhuiquan2">
+										<td class="tds"><input type="text" name="num7" value="7"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-youhuiquan2"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title7" value="我的优惠券"></td>
+										<td class="tds">
+											<input type="radio" name="flag7" class="control-label" value="1" />不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag7" class="control-label" value="2" checked="checked"/>启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">我的收藏</td>
+										<input type="hidden" name="img8" value="https://www.ac-china.cn/image/nisc.png">
+										<input type="hidden" name="url8" value="/pages/collect/collect">
+										<input type="hidden" name="icon8" value="icon-c-xing1">
+										<td class="tds"><input type="text" name="num8" value="8"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-c-xing1"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title8" value="我的收藏"></td>
+										<td class="tds">
+											<input type="radio" name="flag8" class="control-label" value="1" />不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag8" class="control-label" value="2" checked="checked"/>启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">我的地址</td>
+										<input type="hidden" name="img9" value="https://www.ac-china.cn/image/nidz.png">
+										<input type="hidden" name="url9" value="/pages/address/address">
+										<input type="hidden" name="icon9" value="icon-x-dizhi">
+										<td class="tds"><input type="text" name="num9" value="9"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-dizhi"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title9" value="我的地址"></td>
+										<td class="tds">
+											<input type="radio" name="flag9" class="control-label" value="1" />不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag9" class="control-label" value="2" checked="checked"/>启用
+										</td>
+									</tr>
+									<!--  <tr>
+                                         <td class="tds">流水记录</td>
+                                         <input type="hidden" name="img10" value="https://www.ac-china.cn/image/nijf.png">
+                                         <input type="hidden" name="url10" value="/pages/scorelist/scorelist">
+                                         <input type="hidden" name="icon10" value="icon-x-liushui">
+                                         <td class="tds"><input type="text" name="num10" value="10"></td>
+
+                                         <td class="tds" style="margin-left: 70px">
+                                             <div class="iconfont icon-x-liushui"></div>
+                                         </td>
+                                         <td class="tds"><input type="text" name="title10" value=""></td>
+                                         <td class="tds">
+                                             <input type="radio" name="flag10" class="control-label" value="1" />不启用
+                                             <span style="width:10px;display: inline-block;"></span>
+                                             <input type="radio" name="flag10" class="control-label" value="2" />启用
+                                         </td>
+                                     </tr> -->
+
+									<tr>
+										<td class="tds">拼团订单</td>
+										<input type="hidden" name="img11" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url11" value="/pagesPt/orderlist/orderlist">
+										<input type="hidden" name="icon11" value="icon-x-pintuan">
+										<td class="tds"><input type="text" name="num11" value="11"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-pintuan"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title11" value="拼团订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag11" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag11" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">预约订单</td>
+										<input type="hidden" name="img12" value="https://www.ac-china.cn/image/yydd.png">
+										<input type="hidden" name="url12" value="/pagesReserve/orderList/orderList">
+										<input type="hidden" name="icon12" value="icon-x-qiandao3">
+										<td class="tds"><input type="text" name="num12" value="12"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-qiandao3"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title12" value="预约订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag12" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag12" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">秒杀订单</td>
+										<input type="hidden" name="img13" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url13" value="/pagesFlashSale/orderlist_dan/orderlist_dan">
+										<input type="hidden" name="icon13" value="icon-x-miaosha">
+										<td class="tds"><input type="text" name="num13" value="13"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-miaosha"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title13" value="秒杀订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag13" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag13" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">店铺管理</td>
+										<input type="hidden" name="img14" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url14" value="/pagesPluginShop/manage_index/manage_index">
+										<input type="hidden" name="icon14" value="icon-c-dianpu2">
+										<td class="tds"><input type="text" name="num14" value="14"></td>
+
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-c-dianpu2"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title14" value="店铺管理"></td>
+										<td class="tds">
+											<input type="radio" name="flag14" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag14" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">我的表单</td>
+										<input type="hidden" name="img15" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url15" value="/pages/form_list/form_list">
+										<input type="hidden" name="icon15" value="icon-x-dingdan2">
+										<td class="tds"><input type="text" name="num15" value="15"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-dingdan2"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title15" value="我的表单"></td>
+										<td class="tds">
+											<input type="radio" name="flag15" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag15" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">砍价订单</td>
+										<input type="hidden" name="img16" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url16" value="/pagesBargain/orderlist/orderlist">
+										<input type="hidden" name="icon16" value="icon-x-kanjia">
+										<td class="tds"><input type="text" name="num16" value="16"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-kanjia"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title16" value="砍价订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag16" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag16" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">客服</td>
+										<input type="hidden" name="img17" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url17" value="">
+										<input type="hidden" name="icon17" value="icon-x-kefu">
+										<td class="tds"><input type="text" name="num17" value="17"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-kefu"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title17" value="客服"></td>
+										<td class="tds">
+											<input type="radio" name="flag17" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag17" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">我的活动报名</td>
+										<input type="hidden" name="img18" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url18" value="/pagesActive/apply_collect/apply_collect">
+										<input type="hidden" name="icon18" value="icon-x-pingjia">
+										<td class="tds"><input type="text" name="num18" value="18"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-pingjia"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title18" value="活动报名"></td>
+										<td class="tds">
+											<input type="radio" name="flag18" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag18" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">我的评价</td>
+										<input type="hidden" name="img19" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url19" value="/pagesOther/evaluate/evaluate?user=1">
+										<input type="hidden" name="icon19" value="icon-x-pingjia2">
+										<td class="tds"><input type="text" name="num19" value="19"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-pingjia2"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title19" value="我的评价"></td>
+										<td class="tds">
+											<input type="radio" name="flag19" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag19" class="control-label" value="2" />启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">联系我们</td>
+										<input type="hidden" name="img20" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url20" value="">
+										<input type="hidden" name="icon20" value="icon-c-shouji">
+										<td class="tds"><input type="text" name="num20" value="20"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-c-shouji"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title20" value="联系我们"></td>
+										<td class="tds">
+											<input type="radio" name="flag20" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag20" class="control-label" value="2" />启用
+										</td>
+									</tr>
+									<tr>
+										<td class="tds">扫码核销</td>
+										<input type="hidden" name="img21" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url21" value="">
+										<input type="hidden" name="icon21" value="icon-x-saoma">
+										<td class="tds"><input type="text" name="num21" value="21"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-saoma"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title21" value="扫码核销"></td>
+										<td class="tds">
+											<input type="radio" name="flag21" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag21" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									<tr>
+										<td class="tds">多商户订单</td>
+										<input type="hidden" name="img22" value="https://www.ac-china.cn/image/ptdd.png">
+										<input type="hidden" name="url22" value="/pages/order_more_list/order_more_list">
+										<input type="hidden" name="icon22" value="icon-x-ruzhu">
+										<td class="tds"><input type="text" name="num22" value="22"></td>
+										<td class="tds " style="display: none"><img src="/image/ptdd.png" alt=""></td>
+										<td class="tds" style="margin-left: 70px">
+											<div class="iconfont icon-x-ruzhu"></div>
+										</td>
+										<td class="tds"><input type="text" maxlength="6" name="title22" value="多商户订单"></td>
+										<td class="tds">
+											<input type="radio" name="flag22" class="control-label" value="1" checked="checked"/>不启用
+											<span style="width:10px;display: inline-block;"></span>
+											<input type="radio" name="flag22" class="control-label" value="2" />启用
+										</td>
+									</tr>
+
+									</tbody></table>
+								</div>
+								<div class="form-actions form_nobg">
+									<button type="submit" class="btn" style="background:#4385ff;color:#fff;text-align:center;">确定</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="handle_status">
+	<script>
+		function copyid(id){
+			var clipboard = new Clipboard('.js-clip'+id);
+			clipboard.on('success', function(e) {
+				alert("ID复制成功");
+				e.clearSelection();
+			});
+
+			clipboard.on('error', function(e) {
+				alert("ID复制失败");
+			});
+		}
+	</script>
+
+
+
+	<script src="/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<script src="/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+
+	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<script src="/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="/js/jquery.blockui.min.js" type="text/javascript"></script>
+
+	<script src="/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+	<script type="text/javascript" src="/js/bootstrap-fileupload.js"></script>
+
+	<script type="text/javascript" src="/js/chosen.jquery.min.js"></script>
+
+	<script type="text/javascript" src="/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="/js/wysihtml5-0.3.0.js"></script>
+
+	<script type="text/javascript" src="/js/bootstrap-wysihtml5.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.tagsinput.min.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.toggle.buttons.js"></script>
+
+	<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
+
+	<script type="text/javascript" src="/js/clockface.js"></script>
+
+	<script type="text/javascript" src="/js/date.js"></script>
+
+	<script type="text/javascript" src="/js/daterangepicker.js"></script>
+
+	<!--<script type="text/javascript" src="/js/bootstrap-colorpicker.js"></script>  -->
+
+	<script type="text/javascript" src="/js/bootstrap-timepicker.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.inputmask.bundle.min.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.input-ip-address-control-1.0.min.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.multi-select.js"></script>
+
+	<script src="/js/bootstrap-modal.js" type="text/javascript" ></script>
+
+	<script src="/js/bootstrap-modalmanager.js" type="text/javascript" ></script>
+
+	<script src="/js/app.js"></script>
+
+
+	<script src="/js/form-components.js"></script>
+
+	<script src="/js/ui-modals.js"></script>
+	<script src="/js/layer/layer.js"></script>
+	<link href="/js/layer/theme/default/layer.css" rel="stylesheet" type="text/css"/>
+
+	<script>
+		var path ="1";
+		$("body").delegate(".commonchangepic", "click",function(){
+			var type =  $(this).data('type');
+			var classname = $(this).find("input").attr("name");
+			layer.open({
+				type: 2,
+				title: false,
+				area: ['1000px', '680px'],
+				fixed: false, //不固定
+				maxmin: true,
+				content: ['/index/remote/index.html?appletid=56&type='+type,'no'],
+				success:function(layero,index){
+				},
+				end:function(){
+					if(type==2){
+						var handle_status = $("#handle_status").val();
+						if(handle_status!=""){
+							$("input[name="+classname+"]").val(handle_status)
+							var imgarr = handle_status.split(',');
+							var str = "";
+							var imginput = "";
+							var idx = $("input[name='imgsrcs[]']:last").attr('class')
+							if(idx == undefined){
+								idx = '';
+							}else{
+								idx = idx.substring(5);
+							}
+							let j = 0;
+							for(var i=0; i<imgarr.length; i++){
+								if(idx != ''){
+									j = idx*1 + 1;
+								}
+								str+="<div class='paiwei shanc"+j+"' onmousemove='xians(this)' onmouseout='gb(this)'>"+
+										"<img src='"+imgarr[i]+"' style='width:67px;height:67px;border-radius:3px;'>"+
+										"<div class='beijingys'>"+
+										"</div>"+
+										"<div class='sancann' onclick='dels("+j+")'>"+
+										"<span class='cancel' style='background-image: url(/webuploader/css/images/icons.png)''>删除</span>"+
+										"</div>"+
+										"</div>";
+								imginput += '<input type="hidden" name="imgsrcs[]" value="'+imgarr[i]+'" class="shanc'+j+'" />';
+								if(idx != ''){
+									++idx;
+								}else{
+									++j;
+								}
+							}
+							if(str){
+								$(".commonuploadslide").append(str);
+							}
+							if(imginput){
+								$(".commonuploadslide").append(imginput);
+							}
+							$("#handle_status").val("");
+						}
+					}
+					if(type==1){
+						var handle_status = $("#handle_status").val();
+						if(handle_status){
+							var len = classname.split("commonuploadpic");
+							if(len[1] < 10){
+								$("input[name="+classname+"]").val(handle_status)
+								$("."+classname+" img").attr("src",handle_status)
+								$("#handle_status").val("");
+							}else{
+								var len_i = classname.split("commonuploadpic1");
+								var imgxs = "#imgxs"+len_i[1];
+								$("#imgurl"+len_i[1]).val(handle_status);
+								$(imgxs+" img").html("");
+								var imgurl = "<img src="+handle_status+"><div class='xuzndt1' name='imgurl"+len_i[1]+"' onclick='delimage(imgurl"+len_i[1]+")'><img src=/image/guige_delete.png></div>";
+								$(imgxs).html(imgurl);
+							}
+						}
+					}
+				}
+			});
+		});
+
+		function dels(i){
+			$(".shanc"+i).remove();
+		}
+		jQuery(document).ready(function() {
+			App.init(); // initlayout and core plugins
+			FormComponents.init();
+			UIModals.init();
+			$.fn.datetimepicker.dates['zh-CN'] = {
+				days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+				daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+				daysMin:  ["日", "一", "二", "三", "四", "五", "六", "日"],
+				months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				today: "今天",
+				suffix: [],
+				meridiem: ["上午", "下午"]
+			};
+			$('#datetimepicker').datetimepicker({language:  'zh-CN'});
+			$('#datetimepickers').datetimepicker({
+				minView: "month",//设置只显示到月份
+				language:  'zh-CN',
+				format : "yyyy-mm-dd",//日期格式
+				autoclose:true,//选中关闭
+			});
+			$('#datetimepicker2').datetimepicker({language:  'zh-CN'});
+			$('#datetimepicker3').datetimepicker({language:  'zh-CN'});
+			$('#end_datetimepicker').datetimepicker({language:  'zh-CN'});
+			$('#end_datetimepicker2').datetimepicker({language:  'zh-CN'});
+		});
+
+	</script>
+
+
+</body>
+<script type="text/javascript">
+	$('.content_left_single').click(function(){
+		$('.content_left_single').removeClass('content_left_single_on');
+		$(this).addClass('content_left_single_on')
+	})
+	$('.content_right_single').each(function(){
+		$(this).click(function(){
+			if($(this).hasClass('content_right_single_on')){
+				$(this).removeClass('content_right_single_on')
+			}else{
+				$(this).addClass('content_right_single_on')
+			}
+		})
+	})
+	$('.creatphoto').click(function(){
+		$('.cjxcalertbox').show()
+	})
+	$('.cjxc_btn_close').click(function(){
+		$('.cjxcalertbox').hide()
+	})
+	$('.cjxcalert_head_right').click(function(){
+		$('.cjxcalertbox').hide()
+	})
+	$('.cjxc_btn_creat').click(function(){
+		var val = $('.cjxcalert_input').val();
+		var html = $('.content_left').html();
+		html += '<div class="content_left_single hbj"><div class="content_left_single_div1">'+val+'</div><div style="flex: 1;"></div><div class="content_left_single_div2">0</div></div>';
+		$('.content_left').html(html);
+		$('.cjxcalert_input').val("");
+	})
+</script>
+
+</body>
+</html>

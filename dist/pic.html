@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="/css/uploadimg.css"/>
+	<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/js/jquery.form.js"></script>
+	<script src="/js/uploadimg.js" type="text/javascript" charset="utf-8"></script>
+	<title></title>
+</head>
+<body>
+<form id='myupload' action="/index/remote/imgupload.html" method='post' enctype='multipart/form-data'>
+	<input type="file" id="uploadphoto" name="uploadfile[]" value="请点击上传图片" accept="image/png,image/jpeg,image/gif"  style="display: none" multiple/>
+</form>
+<div class="alertbox">
+	<div class="alert">
+		<div class="cjxcalertbox">
+			<div class="cjxcalert">
+				<div class="cjxcalert_head hbj">
+					<div class="cjxcalert_head_left">相册创建</div>
+					<div class="cjxcalert_head_right">X</div>
+				</div>
+				<div class="cjxcalert_content">
+					<div class="cjxcalert_content_div"><span>相册名称</span><input class="cjxcalert_input" type="text" value="" placeholder="请输入相册名称" /></div>
+				</div>
+				<div class="cjxc_btn clearfix">
+					<div class="cjxc_btn_close">关闭</div>
+					<div class="cjxc_btn_creat" onclick="makegroup()">创建</div>
+				</div>
+			</div>
+		</div>
+		<div class="alert_head1 clearfix">
+			<div class="alert_head1_left">我的图片</div>
+		</div>
+		<div class="alert_head2 clearfix">
+			<div class="uploadimg" onclick='uploadphoto.click();'>上传图片
+			</div>
+			<div class="creatphoto">创建相册</div>
+		</div>
+		<div class="content clearfix">
+			<div class="content_left">
+				<div class="content_left_single content_left_single_on hbj group0" data-count="5" onclick="groupid(0)">
+					<div class="content_left_single_div1">全部</div>
+					<div style="flex: 1;"></div>
+					<div class="content_left_single_div2">5</div>
+				</div>
+				<div class="content_left_single content_left_single hbj group1" data-count="2" onclick="groupid(1)">
+					<div class="content_left_single_div1" style="width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;  cursor:text" gid="1">wh</div>
+					<!-- <input class="content_left_single_div1" type="text" name="groupname" value="wh"> -->
+					<div style="flex: 1;"></div>
+					<div class="content_left_single_div2">2</div>
+				</div>
+			</div>
+			<div class="content_right">
+				<div class="clearfix allpics" id="allpic">
+					<div class="content_right_single" onclick="imgurls('https://www.ac-china.cn/upimages/20200729/ee1c9fae4367c4b1a0827f9cdc62f789135.png',this, '46')">
+						<img class="content_right_single_img" src="https://www.ac-china.cn/upimages/20200729/ee1c9fae4367c4b1a0827f9cdc62f789135.png" data-id="46"/>
+						<img class="content_right_single_select" src="/image/select.png"/>
+					</div>
+					<div class="content_right_single" onclick="imgurls('https://www.ac-china.cn/upimages/20200729/3ab6b377cc9ee9aed302efc6f4af7210985.png',this, '45')">
+						<img class="content_right_single_img" src="https://www.ac-china.cn/upimages/20200729/3ab6b377cc9ee9aed302efc6f4af7210985.png" data-id="45"/>
+						<img class="content_right_single_select" src="/image/select.png"/>
+					</div>
+					<div class="content_right_single" onclick="imgurls('https://www.ac-china.cn/upimages/20200729/2db278d2fa1caf52611d6de81c6e4a7a330.png',this, '44')">
+						<img class="content_right_single_img" src="https://www.ac-china.cn/upimages/20200729/2db278d2fa1caf52611d6de81c6e4a7a330.png" data-id="44"/>
+						<img class="content_right_single_select" src="/image/select.png"/>
+					</div>
+					<div class="content_right_single" onclick="imgurls('https://www.ac-china.cn/upimages/20200729/e22d3c5b2b046c8864f11df3a612f2b2786.png',this, '43')">
+						<img class="content_right_single_img" src="https://www.ac-china.cn/upimages/20200729/e22d3c5b2b046c8864f11df3a612f2b2786.png" data-id="43"/>
+						<img class="content_right_single_select" src="/image/select.png"/>
+					</div>
+					<div class="content_right_single" onclick="imgurls('https://www.ac-china.cn/upimages/20200729/f4adf7a52ad9568858083548fe9fd18d961.jpg',this, '42')">
+						<img class="content_right_single_img" src="https://www.ac-china.cn/upimages/20200729/f4adf7a52ad9568858083548fe9fd18d961.jpg" data-id="42"/>
+						<img class="content_right_single_select" src="/image/select.png"/>
+					</div>
+				</div>
+				<div class="uploadpage">
+				</div>
+			</div>
+		</div>
+		<div class="sure" onclick="getres()" style="float: left;display:inline; margin-left: 38%;">确认</div>
+		<div class="sure" onclick="delpic()" style="float: left;display:inline; margin-left: 20px;">删除</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	var imgsrc = "";
+	var imgsrcs = new Array();
+	var imgids = new Array();
+	var type = 1;
+	var gid = 0;
+	var from = 0;
+	console.log(gid)
+	function groupid(i){
+		gid = i;
+		window.location.href="pic.html?appletid=56&gid="+i+"&type="+type;
+	}
+
+	//修改图片组名称
+	$(function() {
+		$(".content_left_single_div1").click(function(event) {
+			var gid = $(event.target).attr('gid')
+			if(gid){
+				event.stopPropagation();
+				var gname = prompt("相册新名称:","请在这里输入新名称!");
+				if(gname && gname != '请在这里输入新名称!'){
+					$.post("/index/remote/changegname.html",{id:gid, gname: gname},function(result){
+						if(result == 1){
+							location.reload();
+						}
+					});
+				}
+
+			}
+
+		});
+	});
+
+
+
+	function makegroup(){
+		var cjxcalert_input = $(".cjxcalert_input").val();
+		$.ajax({
+			url:"/index/remote/makegroup.html",type:"post",dataType:"json",
+			data:{
+				uniacid:56,
+				name:cjxcalert_input
+			},
+			success:function(res){
+				if(res.is == 0){
+					alert("图片组已存在，请重命名后提交创建");
+					return false;
+				}else if(res.is == 2){
+					alert("图片组创建失败");
+					return false;
+				}else if(res.is == 1){
+					var val = $('.cjxcalert_input').val();
+					var html = $('.content_left').html();
+					html += '<div class="content_left_single hbj"><div class="content_left_single_div1" data-id="'+res.id+'">'+val+'</div><div style="flex: 1;"></div><div class="content_left_single_div2">0</div></div>';
+					$('.content_left').html(html);
+					$('.cjxcalertbox').hide()
+				}
+			}
+		});
+	}
+	$('.content_left_single').click(function(){
+		$('.content_left_single').removeClass('content_left_single_on');
+		$(this).addClass('content_left_single_on')
+	})
+	$('.content_left_single').click(function(){
+		$('.content_left_single').removeClass('content_left_single_on');
+		$(this).addClass('content_left_single_on')
+	})
+	// if(type==1){
+	// 	$('.content_right_single').click(function(){
+	// 		$('.content_right_single').removeClass('content_right_single_on');
+	// 		$(this).addClass('content_right_single_on')
+	// 		imgsrc = $(this).find(".content_right_single_img").attr("src");
+	// 	})
+	// }else{
+	// 	$('.content_right_single').each(function(){
+	// 		$(this).click(function(){
+	// 			if($(this).hasClass('content_right_single_on')){
+	// 				$(this).removeClass('content_right_single_on')
+	// 			}else{
+	// 				$(this).addClass('content_right_single_on')
+	// 			}
+	// 		})
+	// 	})
+	// }
+	$('.creatphoto').click(function(){
+		$('.cjxcalertbox').show()
+	})
+
+	$('.cjxc_btn_close').click(function(){
+		$('.cjxcalertbox').hide()
+	})
+	$('.cjxcalert_head_right').click(function(){
+		$('.cjxcalertbox').hide()
+	})
+	$(function(){
+		$("#uploadphoto").change(function(e){
+			$("#myupload").ajaxSubmit({
+				dataType:  'json', //数据格式为json
+				data:{
+					groupid:gid,
+					uniacid:56	          },
+				success: function(data) {
+					var data = $.parseJSON(data);
+					for(var i = 0; i < data.length; i++){
+						var url = data[i]['url'];
+						var pid = data[i]['pid'];
+						if(gid>0){
+							var counts = $(".group0").data("count")+1;
+							$(".group0 .content_left_single_div2").html(counts);
+						}
+						var count = $(".group"+gid).data("count")+1;
+						$(".group"+gid+" .content_left_single_div2").html(count);
+						var html = '<div class="content_right_single" onclick="imgurls(\''+url+'\',this)"><img class="content_right_single_img" src="'+url+'" data-id="'+pid+'"/><img class="content_right_single_select" src="/image/select.png"/></div>'+ $("#allpic").html();
+						$("#allpic").html(html);
+					}
+				}
+			});
+		});
+	});
+	function imgurls(src,e, id){
+		if(src){
+			if($.inArray(src,imgsrcs)>=0){
+				imgsrcs.splice(imgsrcs.indexOf(src),1)
+			}else{
+				imgsrcs.push(src)
+			}
+		}
+		if(type==1){
+			$('.content_right_single').removeClass('content_right_single_on');
+			$(e).addClass('content_right_single_on')
+			imgsrc = $(e).find(".content_right_single_img").attr("src");
+			imgids = new Array();
+			imgids.push(id)
+		}else{
+			if($(e).hasClass('content_right_single_on')){
+				$(e).removeClass('content_right_single_on')
+				imgids.splice(imgids.indexOf(id), 1);
+				console.log(6)
+			}else{
+				$(e).addClass('content_right_single_on')
+				imgids.push(id)
+				console.log(5)
+			}
+		}
+	}
+	function getres(){
+		console.log(imgsrcs)
+		console.log(imgsrc)
+		if(from == 1){
+			console.log('富文本');
+			var index=parent.layer.getFrameIndex(window.name);
+			parent.$("#handle_status").val(imgsrc);
+		}else{
+			if(type==2){
+				var index=parent.layer.getFrameIndex(window.name);
+				parent.$("#handle_status").val(imgsrcs);
+			}
+			if(type==1){
+				var index=parent.layer.getFrameIndex(window.name);
+				parent.$("#handle_status").val(imgsrc);
+			}
+		}
+
+		parent.layer.close(index);
+	}
+
+	function delpic(){
+		var index=parent.layer.getFrameIndex(window.name);
+		var ids = imgids.join(',');
+		if(ids){
+			if(confirm('您确定要删除吗, 该操作不可逆!')){
+				$.post("/index/remote/delpic.html",{ids:ids},function(result){
+					if(result == 1){
+						parent.layer.close(index);
+						alert('删除成功!');
+					}
+				});
+				// location.href = "/index/remote/delpic.html?ids="+ids;
+			}
+		}else{
+			alert('请选择需要删除的图片!');
+		}
+
+	}
+</script>
+
+</html>
