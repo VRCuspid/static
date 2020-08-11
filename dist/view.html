@@ -453,7 +453,28 @@
     </script>
     <script>
       var tpl = "./diypage/resource/js/app/tpl.js";
-
+      function query2Object(query) {
+        if (query.indexOf("?") > -1) {
+          query = query.slice(1);
+        }
+        var obj = {};
+        if (query.indexOf("&") > -1) {
+          var arr = query.split("&");
+          arr.forEach(function (item) {
+            var valuearr = item.split("=");
+            var key = valuearr[0];
+            var value = valuearr[1];
+            obj[key] = value;
+          });
+        } else {
+          var arr = query.split("=");
+          console.log(arr);
+          obj[arr[0]] = arr[1];
+        }
+        return obj;
+      }
+      var obj = query2Object(location.search);
+      var id = obj.id;
       var initdata = {
         page: {
           type: 1,
@@ -592,59 +613,74 @@
           },
         },
       };
-      var modal = {
-        items: initdata.items,
-      };
-      require([tpl], function (tpl) {
-        var phone = $("#phone");
-        tpl.helper("decode", function (content) {
-          return $.base64.decode(content);
-        });
-        if (!modal.items) {
-          modal.items = {};
-
-          return;
-        }
-
-        phone.empty();
-
-        $.each(modal.items, function (itemid, item) {
-          if (typeof item.id !== "undefined") {
-            var newItem = $.extend(true, {}, item);
-
-            newItem.itemid = itemid;
-
-            if (item.id == "audio") {
-              newItem.shoplogo = modal.shopset ? modal.shopset.logo : "";
-            }
-
-            if (item.id == "contact") {
-              newItem.companyinfo = modal.companyinfo;
-            }
-
-            if (item.id == "feedback") {
-              var fId = item.params.formid;
-
-              if (fId != "0" && fId != undefined) {
-                $.each(modal.diyform, function (index, item) {
-                  var diyId = item.id;
-
-                  if (diyId == fId) {
-                    newItem.diyform = item;
-
-                    return false;
-                  }
-                });
-              }
-            }
-
-            var html = tpl("tpl_show_" + item.id, newItem);
-            console.log("tpl_show_" + item.id, newItem);
-
-            $("#phone").append(html);
+      $.get(
+        "/api/enterprise/collegeDecoration/getMicroPage",
+        {
+          id: id,
+        },
+        function (res) {
+          console.log(res, "res");
+          if (res.status == 200) {
+            var itemdata = {
+              page: JSON.parse(res.data.pages),
+              items: JSON.parse(res.data.items),
+            };
+            initView(itemdata)
           }
+        }
+      );
+      function initView(modal) {
+        require([tpl], function (tpl) {
+          var phone = $("#phone");
+          tpl.helper("decode", function (content) {
+            return $.base64.decode(content);
+          });
+          if (!modal.items) {
+            modal.items = {};
+
+            return;
+          }
+
+          phone.empty();
+
+          $.each(modal.items, function (itemid, item) {
+            if (typeof item.id !== "undefined") {
+              var newItem = $.extend(true, {}, item);
+
+              newItem.itemid = itemid;
+
+              if (item.id == "audio") {
+                newItem.shoplogo = modal.shopset ? modal.shopset.logo : "";
+              }
+
+              if (item.id == "contact") {
+                newItem.companyinfo = modal.companyinfo;
+              }
+
+              if (item.id == "feedback") {
+                var fId = item.params.formid;
+
+                if (fId != "0" && fId != undefined) {
+                  $.each(modal.diyform, function (index, item) {
+                    var diyId = item.id;
+
+                    if (diyId == fId) {
+                      newItem.diyform = item;
+
+                      return false;
+                    }
+                  });
+                }
+              }
+
+              var html = tpl("tpl_show_" + item.id, newItem);
+              console.log("tpl_show_" + item.id, newItem);
+
+              $("#phone").append(html);
+            }
+          });
         });
-      });
+      }
     </script>
   </body>
 </html>
