@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://player.polyv.net/livesdk/polyv-live.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.17.0/js/md5.min.js"></script>
+</head>
+<body>
+    <div id="ppt" style="width:500px;height:300px;"></div>
+    <div id="player" style="width:500px;height:300px;"></div>
+    <script>
+        // GET /common/getSpecialSign
+        // 获取sign
+        function getSpecialSign(data,callback) {
+            $.post('/api/common/getSpecialSign',data,callback)
+        }
+
+        function  channels (channelId,callback) {
+            $.get('/polyv/live/v2/channels/'+channelId+'/get',callback)
+        }
+        // /live/v2/channels/{channelId}/get
+        
+    </script>
+
+    <script>
+        function obj2Query(obj) {
+            let arr = [];
+            for (let key in obj) {
+                const str = key + obj[key];
+                arr.push(str);
+            }
+            return arr.join("");
+        }
+        function stringToHex(str) {
+            var arr = [];
+            console.log(str)
+            for (var i = 0; i < str.length; i++) {
+                arr[i] = str[i].toString(16)
+            }
+            return arr.join('');
+        }
+        function createSign(data) {
+            var query = obj2Query(data)
+            var key = '738ebff0ff4e441c8075cdbc38b409c2'
+            query = key+query+key
+            console.log(md5(query))
+            sign = stringToHex(md5(query)).toLocaleUpperCase()
+            return sign
+        }
+    </script>
+    <script>
+        var channelId = 1873916,
+            timestamp = new Date()*1,
+            appId = 'fppr2spr7x',
+            userId = 'userId',
+            data = channelId+timestamp+appId
+            query = {
+                appId:appId,
+                channelId:channelId,
+                timestamp:timestamp,
+            }
+            sign = createSign(query)
+            
+            var key = '738ebff0ff4e441c8075cdbc38b409c2'
+            getSpecialSign({
+                signJoin:key+(obj2Query(query))+key,
+                preJoin:0,
+                nextJoin:0
+            },function (res) {
+                if(res.code == 0) {
+                    var sign = res.data.signMD5.toLocaleUpperCase()
+                    var liveSdk = new PolyvLiveSdk({
+                        channelId: channelId,
+                        timestamp: timestamp, // 毫秒级时间戳
+                        sign: sign, // 频道验证签名
+                        appId: appId, // polyv 后台的appId
+                        user: {
+                            userId: userId,
+                            userName: 'polyv-test',
+                            pic: '//livestatic.videocc.net/assets/wimages/missing_face.png'
+                        }
+                    });
+
+                    liveSdk.on(PolyvLiveSdk.EVENTS.CHANNEL_DATA_INIT, (event, data) => {
+                        liveSdk.setupPlayer({
+                            pptEl: '#ppt',
+                            el: '#player',
+                            type: 'auto'
+                        });
+                    });
+                }
+            })
+          
+
+        
+
+    </script>
+</body>
+</html>

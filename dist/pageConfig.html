@@ -291,7 +291,10 @@
 
             <ul class="nav navbar-nav">
 
-                <li class="return_up_level" data-type="return"> <i class="fa fa-chevron-left" style="margin-right: 5px;vertical-align: middle;"></i><span onclick="returnindex()">返回</span> </li>
+                <li class="return_up_level" data-type="return">
+                    <i class="fa fa-chevron-left" style="margin-right: 5px;vertical-align: middle;"></i>
+                    <span onclick="returnindex()">返回</span>
+                </li>
 
             </ul>
 
@@ -301,7 +304,7 @@
 
             </div> -->
 
-            <div class="nav_center">
+            <!-- <div class="nav_center">
 
                 当前页面：模拟页面
 
@@ -309,7 +312,7 @@
 
                 <nav class="page_nav" id="header-general" onclick="pageset(1)">页面设置 <i class="iconfont icon-x-bianji" style="font-size: 10px;"></i></nav>
 
-            </div>
+            </div> -->
 
             <ul class="nav navbar-nav navbar-right ">
 
@@ -22322,7 +22325,7 @@
 
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">页面背景</div>
 
@@ -22489,7 +22492,7 @@
 
         </div>
 
-    </div>
+    </div> -->
 
     <div class="line"></div>
 
@@ -22555,7 +22558,7 @@
 
     <div class="line"></div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">视频样式</div>
 
@@ -22581,9 +22584,9 @@
 
         </div>
 
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">视频显示方式</div>
 
@@ -22609,9 +22612,9 @@
 
         </div>
 
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">视频封面</div>
 
@@ -22635,9 +22638,18 @@
 
         </div>
 
-    </div>
-
+    </div> -->
     <div class="form-group">
+        <div class="col-sm-2 control-label">选择直播</div>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <div class="live-container"></div>
+                <span data-toggle="selectImg" class="input-group-addon btn btn-default chooseLive">选择直播</span>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">视频链接</div>
 
@@ -22647,7 +22659,6 @@
 
                 <input class="form-control input-sm diy-bind" data-bind-child="params" data-bind="videourl" data-bind-init="true" value="<%params.videourl%>" data-url="<%params.videourl%>" id="videourl" placeholder="请输入视频地址" />
 
-                <!-- <span data-input="#videourl" data-img="#showvideo" data-toggle="selectVideo" class="input-group-addon btn btn-default">选择视频</span> -->
 
             </div>
 
@@ -22669,7 +22680,7 @@
 
             </div>
 
-            <%/if%>
+            <%/if%> -->
 
         </div>
 
@@ -22987,83 +22998,6 @@
 
     <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
 
-<script type="text/javascript">
-
-    var showdt = function (){
-
-        $(".dt").show();
-
-    }
-
-    var hidedt = function(){
-
-        $('.dt').hide();
-
-    }
-
-    var map = new BMap.Map("container");//在指定的容器内创建地图实例
-
-    map.setDefaultCursor("crosshair");//设置地图默认的鼠标指针样式
-
-    map.enableScrollWheelZoom();//启用滚轮放大缩小，默认禁用。
-
-    map.centerAndZoom(new BMap.Point(116.124878, 24.309178), 13);
-
-    map.addControl(new BMap.NavigationControl());
-
-    //地图单击事件
-
-    map.addEventListener("click", function(e){
-
-        $("#longitude1").attr("value",e.point.lng).trigger('change');
-
-        $("#latitude1").attr("value",e.point.lat).trigger('change');
-
-        $('.jwdspan').html(e.point.lng+','+e.point.lat)
-
-        // params.hzb = e.point.lng
-
-        // params.zzb = e.point.lat
-
-        // params:{
-
-        //  hzb : e.point.lng,
-
-        //  zzb : e.point.lat
-
-        // }
-
-    });
-
-    // 根据IP设置地图中心
-
-    function iploac(result){
-
-        var cityName = result.name;
-
-        map.setCenter(cityName);
-
-    }
-
-    var myCity = new BMap.LocalCity();
-
-    myCity.get(iploac);
-
-    //地图搜索
-
-    function sear(result){
-
-        var local = new BMap.LocalSearch(map, {
-
-            renderOptions:{map: map}
-
-        });
-
-        local.search(result);
-
-    }
-
-</script>
 
 </script>
 
@@ -25490,6 +25424,25 @@
     });
     //图片层end
 
+    // 直播组件-选择直播start
+    $('body').delegate('.chooseLive', 'click',function() {
+        console.log(2323)
+        layer.open({
+            type:2,
+            title:false,
+            area: ['800px','400px'],
+            fixed: false,
+            maxmin:true,
+            content:'/liveLayer.html',
+            success: function(layero,index) {
+
+            },
+            end: function() {
+                console.log(23)
+            }
+        })
+    })
+    // 直播组件-选择直播end
     function returnindex(){
         layer.confirm('是否保存页面?',function() {
             $(".save-page").click()
@@ -25519,28 +25472,30 @@
     var id = 336;
 
     
-        // var itemdata = JSON.parse('{\"id\":336,\"uniacid\":56,\"index\":1,\"page\":{\"type\":1,\"title\":\"请输入页面标题\",\"name\":\"未命名页面\",\"background\":\"rgb(241, 241, 241)\",\"topbackground\":\"#ffffff\",\"topcolor\":\"1\",\"styledata\":\"0\",\"repeat\":\"\",\"positionx\":\"0\",\"positiony\":\"0\",\"size\":\"0\",\"sizew\":\"20\",\"sizeh\":\"20\",\"visitlevel\":{\"member\":null,\"commission\":null},\"novisit\":[]},\"items\":{\"M1595998937180\":{\"icon\":\"#iconzhufubiaoti\",\"params\":{\"title\":\"主标题\",\"title2\":\"副标题描述\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"style\":\"1\"},\"style\":{\"background\":\"#ffffff\",\"colorz\":\"#434343\",\"colorf\":\"#838383\",\"linecolor\":\"#434343\",\"fontsizez\":\"14\",\"fontsizef\":\"12\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"mt\":\"10\"},\"id\":\"title2\"},\"M1595998940822\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998940822\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940823\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940824\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\"},\"M1595998944852\":{\"icon\":\"#iconfuzhuxian\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"2\",\"background\":\"#ffffff\",\"border\":\"#000000\",\"padding\":\"0\",\"pd\":\"0\",\"linestyle\":\"solid\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"line\"},\"M1595998946380\":{\"icon\":\"#iconfuzhukongbai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"42\",\"background\":\"#ffffff\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"blank\"},\"M1595998948438\":{\"icon\":\"#icontupianlunbo\",\"params\":{\"totle\":2,\"navstyle\":\"1\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"navstyle2\":0},\"style\":{\"dotstyle\":\"round\",\"dotalign\":\"left\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"background\":\"#ffffff\",\"backgroundall\":\"#ffffff\",\"leftright\":\"5\",\"bottom\":\"5\",\"opacity\":\"0.8\",\"text_color\":\"#fff\",\"bg\":\"#000000\",\"jsq_color\":\"red\",\"pdh\":\"0\",\"pdw\":\"0\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"speed\":\"5\"},\"data\":{\"C1595998948438\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"\",\"text\":\"文字描述\"},\"C1595998948439\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"ddddsaasddsa\",\"text\":\"文字描述\"}},\"id\":\"banner\"},\"M1595998985884\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998985884\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985885\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985886\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998968645\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998968645\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968646\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968647\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998971519\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\"},\"M1595998972405\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998972907\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998941499\":{\"icon\":\"#iconzutumokuai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"background\":\"#ffffff\"},\"data\":{\"C1595998941499\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\"}},\"id\":\"picture\"}},\"tpl_name\":\"未命名页面\",\"diyform\":[]}');
-        //  console.log(itemdata)
-        // if(itemdata){
+        var itemdata = JSON.parse('{\"id\":336,\"uniacid\":56,\"index\":1,\"page\":{\"type\":1,\"title\":\"请输入页面标题\",\"name\":\"未命名页面\",\"background\":\"rgb(241, 241, 241)\",\"topbackground\":\"#ffffff\",\"topcolor\":\"1\",\"styledata\":\"0\",\"repeat\":\"\",\"positionx\":\"0\",\"positiony\":\"0\",\"size\":\"0\",\"sizew\":\"20\",\"sizeh\":\"20\",\"visitlevel\":{\"member\":null,\"commission\":null},\"novisit\":[]},\"items\":{\"M1595998937180\":{\"icon\":\"#iconzhufubiaoti\",\"params\":{\"title\":\"主标题\",\"title2\":\"副标题描述\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"style\":\"1\"},\"style\":{\"background\":\"#ffffff\",\"colorz\":\"#434343\",\"colorf\":\"#838383\",\"linecolor\":\"#434343\",\"fontsizez\":\"14\",\"fontsizef\":\"12\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"mt\":\"10\"},\"id\":\"title2\"},\"M1595998940822\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998940822\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940823\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940824\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\"},\"M1595998944852\":{\"icon\":\"#iconfuzhuxian\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"2\",\"background\":\"#ffffff\",\"border\":\"#000000\",\"padding\":\"0\",\"pd\":\"0\",\"linestyle\":\"solid\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"line\"},\"M1595998946380\":{\"icon\":\"#iconfuzhukongbai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"42\",\"background\":\"#ffffff\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"blank\"},\"M1595998948438\":{\"icon\":\"#icontupianlunbo\",\"params\":{\"totle\":2,\"navstyle\":\"1\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"navstyle2\":0},\"style\":{\"dotstyle\":\"round\",\"dotalign\":\"left\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"background\":\"#ffffff\",\"backgroundall\":\"#ffffff\",\"leftright\":\"5\",\"bottom\":\"5\",\"opacity\":\"0.8\",\"text_color\":\"#fff\",\"bg\":\"#000000\",\"jsq_color\":\"red\",\"pdh\":\"0\",\"pdw\":\"0\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"speed\":\"5\"},\"data\":{\"C1595998948438\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"\",\"text\":\"文字描述\"},\"C1595998948439\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"ddddsaasddsa\",\"text\":\"文字描述\"}},\"id\":\"banner\"},\"M1595998985884\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998985884\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985885\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985886\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998968645\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998968645\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968646\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968647\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998971519\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\"},\"M1595998972405\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998972907\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998941499\":{\"icon\":\"#iconzutumokuai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"background\":\"#ffffff\"},\"data\":{\"C1595998941499\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\"}},\"id\":\"picture\"}},\"tpl_name\":\"未命名页面\",\"diyform\":[]}');
+         console.log(itemdata)
+        if(itemdata){
 
-        //     if(itemdata.items != ''){
+            if(itemdata.items != ''){
 
-        //         $.each(itemdata.items, function(i, item){
+                $.each(itemdata.items, function(i, item){
 
-        //             if(item.id == 'contact'){
+                    if(item.id == 'contact'){
 
-        //                 item.params.intro = item.params.intro.replace(/<br>/g,"\n");
+                        item.params.intro = item.params.intro.replace(/<br>/g,"\n");
 
-        //             }
+                    }
 
-        //         });
+                });
 
-        //     }else{
-        //         var itemdata = '';
+            }else{
+                var itemdata = '';
 
-        //     }
+            }
 
-        // }
+        }
+
+        
 
 
     var path = './diypage/resource/js/diypage/diy.min.js';
@@ -25575,6 +25530,19 @@
     var obj = query2Object(location.search)
     var id = obj.id
     require([path,tpl,biz,custom],function(modal,tpl,biz,custom){
+        modal.init({
+                        tpl: tpl,
+                        attachurl: "",//{php echo $_W['attachurl_local'];}
+                        id: id,
+                        siteid: '727',
+                        type: 1,
+                        data: itemdata,
+                        // diyform: itemdata.diyform,
+                        companyinfo: {"content":""},
+                        merch: 0,
+                        plugins: {"creditshop":0,"merch":0,"seckill":0,"exchange":0},
+                        shopset: null
+                    });
         if(id) {
             $.get('/api/enterprise/collegeDecoration/getMicroPage',{
                 id:id,

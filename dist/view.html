@@ -66,152 +66,175 @@
     <div class="phone" id="phone">哈哈哈</div>
     <!-- banner模板 -->
     <script type="text/html" id="tpl_show_banner">
-
       <div class="drag" data-itemid="<%itemid%>">
+        <div
+          class="diy-banner"
+          style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.backgroundall%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding:<%style.paddingtop||'0'%>px <%style.paddingleft||'0'%>px;margin-top: <%style.mt%>px"
+        >
+          <div style="position: relative;">
+            <%each data as item%>
 
-          <div class="diy-banner" style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.backgroundall%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding:<%style.paddingtop||'0'%>px <%style.paddingleft||'0'%>px;margin-top: <%style.mt%>px">
+            <img
+              src="<%item.imgurl%>"
+              style="<%if params.imgh%>height:<%params.imgh%>px<%/if%>"
+              onerror="this.src='./diypage/resource/images/diypage/default/banner-1.jpg'"
+            />
 
-              <div style="position: relative;">
+            <%/each%> <%if params.navstyle==0%>
 
-                  <%each data as item%>
+            <div
+              class="dots center round"
+              style="bottom: <%style.bottom||'10'%>px; opacity: <%style.opacity||'0.8'%>;"
+            >
+              <%each data as item%>
 
-                  <img src="<%item.imgurl%>" style="<%if params.imgh%>height:<%params.imgh%>px<%/if%>" onerror="this.src='./diypage/resource/images/diypage/default/banner-1.jpg'"/>
+              <span
+                style="background: <%style.background||'#000000'%>;margin: 0 <%style.leftright/2||'10'%>px;"
+              ></span>
 
-                  <%/each%>
+              <%/each%>
+            </div>
 
-                  <%if params.navstyle==0%>
+            <%/if%> <%if params.navstyle==1%> <%each data as item%>
 
-                  <div class="dots center round" style="bottom: <%style.bottom||'10'%>px; opacity: <%style.opacity||'0.8'%>;">
+            <div
+              style="position: absolute;color: <%style.text_color%>;padding: <%style.pdh||'5'%>px <%style.pdw||'10'%>px;background-color: <%style.bg%>;left: 0;right: 0;bottom: 0;"
+            >
+              <%item.text%>
 
-                      <%each data as item%>
-
-                      <span style="background: <%style.background||'#000000'%>;margin: 0 <%style.leftright/2||'10'%>px;"></span>
-
-                      <%/each%>
-
-                  </div>
-
-                  <%/if%>
-
-                  <%if params.navstyle==1%>
-
-                  <%each data as item%>
-
-                  <div style="position: absolute;color: <%style.text_color%>;padding: <%style.pdh||'5'%>px <%style.pdw||'10'%>px;background-color: <%style.bg%>;left: 0;right: 0;bottom: 0;">
-
-                      <%item.text%>
-
-                      <div style="float: right; color: <%style.text_color%>"><span style="color:<%style.jsq_color%>"><%item.single%></span>/<%params.totle%></div>
-
-                  </div>
-
-                  <%/each%>
-
-                  <%/if%>
-
-                  <%if params.navstyle2==1%>
-
-                  <div style="height: 100%;width: 10px;position: absolute;overflow: hidden;left: 0;top: 0">
-
-                      <img style="height: 100%" src="./diypage//template/diy/resource/images/diypage/default/goods-4.jpg">
-
-                  </div>
-
-                  <div style="height: 100%;width: 10px;position: absolute;overflow: hidden;right:0;top: 0">
-
-                      <img style="height: 100%" src="./diypage//template/diy/resource/images/diypage/default/goods-4.jpg">
-
-                  </div>
-
-                  <%/if%>
-
+              <div style="float: right; color: <%style.text_color%>">
+                <span style="color:<%style.jsq_color%>"><%item.single%></span
+                >/<%params.totle%>
               </div>
+            </div>
 
+            <%/each%> <%/if%> <%if params.navstyle2==1%>
+
+            <div
+              style="height: 100%;width: 10px;position: absolute;overflow: hidden;left: 0;top: 0"
+            >
+              <img
+                style="height: 100%"
+                src="./diypage//template/diy/resource/images/diypage/default/goods-4.jpg"
+              />
+            </div>
+
+            <div
+              style="height: 100%;width: 10px;position: absolute;overflow: hidden;right:0;top: 0"
+            >
+              <img
+                style="height: 100%"
+                src="./diypage//template/diy/resource/images/diypage/default/goods-4.jpg"
+              />
+            </div>
+
+            <%/if%>
           </div>
-
+        </div>
       </div>
     </script>
     <!-- 按钮组模板 -->
     <script type="text/html" id="tpl_show_menu">
-
       <div class="drag" data-itemid="<%itemid%>">
+        <%if data==''%>
 
-          <%if data==''%>
+        <div class="nochild">您还没有添加图标</div>
 
-          <div class="nochild">您还没有添加图标</div>
+        <%else%>
 
-          <%else%>
+        <div
+          class="fui-icon-group noborder col-<%style.rownum%> <%style.navstyle%> <%if style.showtype>0%>pb10<%/if%>"
+          style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding:<%style.padding||0%>px <%style.paddingleft||0%>px;margin-top: <%style.mt%>px"
+        >
+          <%each data as item%>
 
-          <div class="fui-icon-group noborder col-<%style.rownum%> <%style.navstyle%> <%if style.showtype>0%>pb10<%/if%>" style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding:<%style.padding||0%>px <%style.paddingleft||0%>px;margin-top: <%style.mt%>px">
+          <div class="fui-icon-col">
+            <%if params.picicon==1%><img
+              src="<%item.imgurl%>"
+              style="display: block;margin: 0 auto;height:<%style.imgwidth||'47'%>px;width: <%style.imgwidth||'47'%>px;max-width: 100%"
+            /><%/if%>
+            <!-- <%if params.picicon==2%><div class="iconfont <%item.icon%>" style="font-size: <%style.iconfz%>px;color: <%style.iconcolor%>"></div><%/if%> -->
+            <%if params.picicon==2%>
+            <span
+              class="iconfont <%item.iconclass%>"
+              style="margin:8px auto 0;box-sizing:content-box;display:block;font-size: <%style.iconfont%>px;padding:<%style.paddingtop||'0'%>px 0;width:<%style.iconfont%>px;height:<%style.iconfont%>px;line-height: <%style.iconfont%>px;"
+            ></span>
+            <%/if%>
 
-              <%each data as item%>
+            <div
+              class="text"
+              style="color: <%item.color%>;display: <%if params.textshow==2 %>none<%/if%>"
+            >
+              <%item.text%>
+            </div>
+          </div>
 
-              <div class="fui-icon-col">
-                  <%if params.picicon==1%><img src="<%item.imgurl%>" style="display: block;margin: 0 auto;height:<%style.imgwidth||'47'%>px;width: <%style.imgwidth||'47'%>px;max-width: 100%"><%/if%>
-                  <!-- <%if params.picicon==2%><div class="iconfont <%item.icon%>" style="font-size: <%style.iconfz%>px;color: <%style.iconcolor%>"></div><%/if%> -->
-                  <%if params.picicon==2%>
-                  <span class="iconfont <%item.iconclass%>" style="margin:8px auto 0;box-sizing:content-box;display:block;font-size: <%style.iconfont%>px;padding:<%style.paddingtop||'0'%>px 0;width:<%style.iconfont%>px;height:<%style.iconfont%>px;line-height: <%style.iconfont%>px;"></span>
-                  <%/if%>
+          <%/each%> <%if style.showdot>0&&style.showtype==1%>
 
-                  <div class="text"  style="color: <%item.color%>;display: <%if params.textshow==2 %>none<%/if%>"><%item.text%></div>
+          <div class="fui-icon-group-pagination">
+            <a class="active"></a>
 
-              </div>
-
-              <%/each%>
-
-              <%if style.showdot>0&&style.showtype==1%>
-
-              <div class="fui-icon-group-pagination">
-
-                  <a class="active"></a>
-
-                  <a></a>
-
-              </div>
-
-              <%/if%>
-
+            <a></a>
           </div>
 
           <%/if%>
+        </div>
 
+        <%/if%>
       </div>
     </script>
     <!--搜索框-->
 
     <script type="text/html" id="tpl_show_ssk">
-
-      <div class="drag" data-itemid="<%itemid%>" >
-
-          <div style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding: <%style.boxpdh%>px <%style.boxpdz%>px;margin-top: <%style.mt%>px">
-
-              <input type="text" name="" id="" value="请输入关键词" style="width:100%;border:1px solid #ccc;font-size:<%style.fontsize%>px;text-align:<%style.textalign%>;border-radius: <%style.borderradius%>px;background: <%style.bg%>;padding:<%style.padding%>px;color: <%style.color%>" />
-
-          </div>
-
+      <div class="drag" data-itemid="<%itemid%>">
+        <div
+          style="background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>padding: <%style.boxpdh%>px <%style.boxpdz%>px;margin-top: <%style.mt%>px"
+        >
+          <input
+            type="text"
+            name=""
+            id=""
+            value="请输入关键词"
+            style="width:100%;border:1px solid #ccc;font-size:<%style.fontsize%>px;text-align:<%style.textalign%>;border-radius: <%style.borderradius%>px;background: <%style.bg%>;padding:<%style.padding%>px;color: <%style.color%>"
+          />
+        </div>
       </div>
     </script>
     <!-- 富文本 -->
     <script type="text/html" id="tpl_show_richtext">
-
       <div class="drag" data-itemid="<%itemid%>">
+        <div
+          class="diy-richtext"
+          style="background: <%style.background%>; padding: <%style.padding%>px;margin-top: <%style.margintop%>px"
+        >
+          <%if params.content%> <%=decode(params.content)%> <%else%>
 
-          <div class="diy-richtext" style="background: <%style.background%>; padding: <%style.padding%>px;margin-top: <%style.margintop%>px">
+          <p style="font-size:12px;color:#838383;line-height:20px;">
+            1.对文字进行加粗、斜体、下划线、删除线、文字颜色、背景色、以及字号大小等简单排版操作。
+          </p>
+          <p style="font-size:12px;color:#838383;line-height:20px;">
+            2.添加表格，如中奖客户、发放奖品、备注、猪猪、内测码、已经发放、大麦、积分、领取地址。
+          </p>
+          <p style="font-size:12px;color:#838383;line-height:20px;">
+            3.插入图片，图片可以加上超链接，方便用户点击。
+          </p>
 
-              <%if params.content%>
+          <%/if%>
+        </div>
+      </div>
+    </script>
 
-              <%=decode(params.content)%>
-
-              <%else%>
-
-              <p style="font-size:12px;color:#838383;line-height:20px;">1.对文字进行加粗、斜体、下划线、删除线、文字颜色、背景色、以及字号大小等简单排版操作。</p>
-              <p style="font-size:12px;color:#838383;line-height:20px;">2.添加表格，如中奖客户、发放奖品、备注、猪猪、内测码、已经发放、大麦、积分、领取地址。</p>
-              <p style="font-size:12px;color:#838383;line-height:20px;">3.插入图片，图片可以加上超链接，方便用户点击。</p>
-
-              <%/if%>
-
-          </div>
-
+    <!--直播 -->
+    <script type="text/html" id="tpl_show_video">
+      <div
+        class="drag"
+        data-itemid="<%itemid%>"
+        style="padding:<%style.paddingtop||'0'%>px <%style.paddingleft%>px;background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>margin-top: <%style.mt%>px"
+      >
+        <div
+          class="diy-video style<%style.ratio%>"
+          style='background-image: url("<%imgsrc(params.poster) || "./diypage/resource/images/diypage/default/videoplay.png"%>")'
+        ></div>
       </div>
     </script>
     <script
@@ -475,144 +498,6 @@
       }
       var obj = query2Object(location.search);
       var id = obj.id;
-      var initdata = {
-        page: {
-          type: 1,
-          title: "请输入页面标题",
-          name: "未命名页面",
-          background: "rgb(241, 241, 241)",
-          topbackground: "#ffffff",
-          topcolor: "1",
-          styledata: "0",
-          repeat: "",
-          positionx: "0",
-          positiony: "0",
-          size: "0",
-          sizew: "20",
-          sizeh: "20",
-          visitlevel: { member: null, commission: null },
-          novisit: {},
-        },
-        items: {
-          M1596693082273: {
-            icon: "#iconanniuzu",
-            params: {
-              styledata: "0",
-              repeat: "repeat",
-              positionx: "left",
-              positiony: "top",
-              size: "0",
-              backgroundimg: "",
-              picicon: "1",
-              textshow: "1",
-            },
-            style: {
-              navstyle: "circle",
-              background: "#ffffff",
-              rownum: "5",
-              showtype: "0",
-              pagenum: "8",
-              showdot: "1",
-              padding: "0",
-              paddingleft: "10",
-              mt: "10",
-              sizew: "20",
-              sizeh: "20",
-              iconfz: "14",
-              iconcolor: "#434343",
-              imgwidth: "50",
-            },
-            data: {
-              C1596693082275: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-3.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-              C1596693082276: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-4.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-              C1596693082277: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-4.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-              C1596693082278: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-3.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-              C1596693082279: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-2.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-              C1596693082280: {
-                imgurl: "./diypage/resource/images/diypage/default/icon-1.png",
-                linkurl: "",
-                text: "按钮文字",
-                color: "#666666",
-                icon: "icon-x-shouye2",
-                iconclass: "icon-x-shouye2",
-              },
-            },
-            id: "menu",
-          },
-          M1596693216714: {
-            icon: "#iconsousuolan",
-            params: {
-              value: "",
-              styledata: "0",
-              repeat: "repeat",
-              positionx: "left",
-              positiony: "top",
-              size: "0",
-              backgroundimg: "",
-            },
-            style: {
-              textalign: "left",
-              background: "#ffffff",
-              bg: "#ffffff",
-              borderradius: "5",
-              boxpdh: "10",
-              boxpdz: "15",
-              padding: "5",
-              fontsize: "13",
-              mt: "0",
-              sizew: "20",
-              sizeh: "20",
-              color: "#cccccc",
-            },
-            id: "ssk",
-          },
-          M1596693305731: {
-            max: 5,
-            icon: "#iconfuwenben",
-            params: {
-              content:
-                "PHA+PHNwYW4gc3R5bGU9InRleHQtZGVjb3JhdGlvbjogbGluZS10aHJvdWdoOyI+PHN0cm9uZz5oYWhhPC9zdHJvbmc+PC9zcGFuPjxici8+PC9wPg==",
-            },
-            style: { background: "#ffffff", padding: "10", margintop: "10" },
-            id: "richtext",
-          },
-        },
-      };
       $.get(
         "/api/enterprise/collegeDecoration/getMicroPage",
         {
@@ -625,7 +510,7 @@
               page: JSON.parse(res.data.pages),
               items: JSON.parse(res.data.items),
             };
-            initView(itemdata)
+            initView(itemdata);
           }
         }
       );
@@ -634,6 +519,25 @@
           var phone = $("#phone");
           tpl.helper("decode", function (content) {
             return $.base64.decode(content);
+          });
+          tpl.helper("imgsrc", function (src) {
+            if (typeof src != "string") {
+              return "";
+            }
+
+            if (
+              src.indexOf("http://") == 0 ||
+              src.indexOf("https://") == 0 ||
+              src.indexOf("./resource/") == 0
+            ) {
+              return src;
+            } else if (
+              src.indexOf("images/") == 0 ||
+              src.indexOf("audios/") == 0 ||
+              src.indexOf("videos/") == 0
+            ) {
+              return modal.attachurl + src;
+            }
           });
           if (!modal.items) {
             modal.items = {};

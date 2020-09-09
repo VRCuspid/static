@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="/css/chooseLive.css"/>
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<title></title>
+</head>
+<body>
+    <div class="layer-box" id="app">
+        <el-table 
+            :data="dataSource"
+            stripe
+            align="center"
+            style="width:100%;"
+        >
+            <el-table-column align="center" label="数据源简称" prop="name"></el-table-column>
+            <el-table-column align="center" label="类型" prop="type"></el-table-column>
+            <el-table-column align="center" label="链接信息" prop="url"></el-table-column>
+            <el-table-column align="center" label="用户信息" prop="userName"></el-table-column>
+            <el-table-column align="center" label="状态" prop="isDelete">
+                <template slot-scope="scope">
+                    <span>{{scope.row.isDelete===0?'启用':'禁用'}}</span>
+                </template>
+            </el-table-column>
+        </el-table>
+        <div class="mt20 pagination">
+            <el-pagination
+                background
+                layout="sizes, prev, pager, next"
+                :current-page.sync="page"
+                :page-size.sync="size"
+                :page-sizes="[10,20,30,50]"
+                :total="total">
+            </el-pagination>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+// GET /enterprise/live/listLive
+function listLive(ck) {
+    $.get('/api/enterprise/live/listLive',ck)
+}
+</script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            test:111,
+            dataSource:[],
+            page:1,
+            size:10,
+            total:10,
+        },
+        created:function() {
+            console.log(this,'_this')
+            this.listLive()
+        },
+        methods: {
+            listLive() {
+                var _t = this
+                $.get('/api/enterprise/live/listLive',function(res){
+                    console.log(res)
+                })
+            },
+            showTest:function() {
+                console.log(2323)
+            }
+        }
+    })
+    console.log(vue)
+</script>
+
+</html>
