@@ -227,8 +227,9 @@
     <!--直播 -->
     <script type="text/html" id="tpl_show_video">
       <div
-        class="drag"
-        data-itemid="<%itemid%>"
+        class="drag live-room"
+        data-liveId="<%params.liveId%>"
+        data-channelId="<%params.channelId%>"
         style="padding:<%style.paddingtop||'0'%>px <%style.paddingleft%>px;background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>margin-top: <%style.mt%>px"
       >
         <div
@@ -476,6 +477,28 @@
     </script>
     <script>
       var tpl = "./diypage/resource/js/app/tpl.js";
+      $('body').delegate('.live-room','click',function(e){
+        var tar = $(e.currentTarget)
+        var liveId = tar.attr('data-liveId')
+        var channelId = tar.attr('data-channelId')
+        console.log(liveId)
+        $.ajax({
+          url:'/api/enterprise/live/liveDetail',
+          data:{
+            liveId
+          },
+          method:'GET',
+          success:function(res) {
+            console.log(res)
+            if(res.status===200) {
+              if(res.data.status=='live') {
+                location.href = 'https://live.polyv.cn/watch/'+channelId
+              }
+            }
+          }
+        })
+      })
+
       function query2Object(query) {
         if (query.indexOf("?") > -1) {
           query = query.slice(1);
@@ -581,6 +604,7 @@
               console.log("tpl_show_" + item.id, newItem);
 
               $("#phone").append(html);
+              
             }
           });
         });

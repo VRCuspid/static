@@ -17,34 +17,52 @@
             stripe
             align="center"
             style="width:100%;"
+            @selection-change="handleSelectionChange"
         >
-            <el-table-column align="center" label="数据源简称" prop="name"></el-table-column>
-            <el-table-column align="center" label="类型" prop="type"></el-table-column>
-            <el-table-column align="center" label="链接信息" prop="url"></el-table-column>
-            <el-table-column align="center" label="用户信息" prop="userName"></el-table-column>
-            <el-table-column align="center" label="状态" prop="isDelete">
+            <el-table-column
+                type="selection"
+                width="55">
+            </el-table-column>
+            <el-table-column align="center" type="index" label="序号"></el-table-column>
+            <el-table-column align="center" prop="liveName" label="直播名称"></el-table-column>
+            <el-table-column align="center" prop="channelId" label="直播间号"></el-table-column>
+            <el-table-column align="center" prop="coverImg" label="直播封面">
                 <template slot-scope="scope">
-                    <span>{{scope.row.isDelete===0?'启用':'禁用'}}</span>
+                    <img style="width:100px;height: 80px;" :src="scope.row.coverImg" />
                 </template>
             </el-table-column>
+            <el-table-column align="center" prop="status" label="直播状态">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.status=='live'">直播中</span>
+                    <span v-else-if="scope.row.status==='waiting'">等待直播</span>
+                    <span v-else-if="scope.row.status==='end'">直播结束</span>
+                </template>
+            </el-table-column>
+            <el-table-column align="center" prop="startTime" label="开始时间"></el-table-column>
+            <el-table-column align="center" prop="endTime" label="结束时间"></el-table-column>
         </el-table>
         <div class="mt20 pagination">
             <el-pagination
                 background
+                @size-change="listLive"
+                @current-change="listLive"
                 layout="sizes, prev, pager, next"
                 :current-page.sync="page"
                 :page-size.sync="size"
-                :page-sizes="[10,20,30,50]"
+                :page-sizes="[5,10,20,30]"
                 :total="total">
             </el-pagination>
+        </div>
+        <div class="mt20 footer">
+            <el-button>取消</el-button>
+            <el-button @click="save" type="primary">确定</el-button>
         </div>
     </div>
 </body>
 <script type="text/javascript">
 // GET /enterprise/live/listLive
-function listLive(ck) {
-    $.get('/api/enterprise/live/listLive',ck)
-}
+var token = localStorage.getItem('token')
+
 </script>
 <script type="text/javascript">
     var vue = new Vue({
@@ -52,8 +70,9 @@ function listLive(ck) {
         data: {
             test:111,
             dataSource:[],
+            selectList:[],
             page:1,
-            size:10,
+            size:5,
             total:10,
         },
         created:function() {
@@ -63,12 +82,42 @@ function listLive(ck) {
         methods: {
             listLive() {
                 var _t = this
-                $.get('/api/enterprise/live/listLive',function(res){
-                    console.log(res)
+                var data = {
+                    page:_t.page,
+                    limit:_t.size
+                }
+                $.ajax({
+                    url:'/api/enterprise/live/listLive',
+                    methods: 'GET',
+                    data,
+                    headers:{
+                        'Authorization': token
+                    },
+                    success:function(res) {
+                        console.log(res)
+                        if(res.status===200) {
+                            _t.dataSource = res.data.rows
+                            _t.total = res.data.total
+                        }
+                    },
                 })
+            },
+            handleSelectionChange(list) {
+                this.selectList = list
             },
             showTest:function() {
                 console.log(2323)
+            },
+            save() {
+                var index=parent.layer.getFrameIndex(window.name);
+                if(this.selectList.length>1) {
+                    this.$message.error('只能选择一条数据！')
+                } else if (this.selectList.length < 1) {
+                    this.$message.error('请选择数据！')
+                } else {
+                    parent.$("#live_id").val(this.selectList[0].id)
+                    parent.layer.close(index);
+                }
             }
         }
     })

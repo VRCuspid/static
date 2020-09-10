@@ -68,6 +68,10 @@
 
     <link href="./js/layer/theme/default/layer.css" rel="stylesheet" type="text/css"/>
     <!-- 图片层end -->
+
+    <!-- 添加直播start -->
+    <input type="hidden" id="live_id">
+    <!-- 添加直播end -->
     <!--
 
         <script type="text/javascript" src="./diypage/resource/js/lib/bootstrap.min.js"></script>
@@ -22643,12 +22647,25 @@
         <div class="col-sm-2 control-label">选择直播</div>
         <div class="col-sm-10">
             <div class="input-group">
-                <div class="live-container"></div>
-                <span data-toggle="selectImg" class="input-group-addon btn btn-default chooseLive">选择直播</span>
+                <input placeholder="直播id" class="form-control liveId diy-bind" data-bind-child="params" data-bind="liveId" data-bind-init="true" value="<%params.liveId%>" id="liveId" />
+                <input placeholder="直播名称" class="form-control liveName diy-bind" data-bind-child="params" data-bind="liveName" data-bind-init="true" value="<%params.liveName%>" id="liveName" />
+                <input placeholder="直播id" class="form-control channelId diy-bind" data-bind-child="params" data-bind="channelId" data-bind-init="true" value="<%params.channelId%>" id="channelId" />
+                <input placeholder="直播id" class="form-control channelId diy-bind" data-bind-child="params" data-bind="poster" data-bind-init="true" value="<%params.poster%>" id="poster" />
+                <!-- <%if params.liveId!='' %>
+                    <div
+                    class="drag"
+                    data-id="<%params.liveId%>"
+                    >
+                    <% params.liveName %>
+                </div>
+                
+                <%/if%> -->
             </div>
+            <span data-toggle="selectImg" class="input-group-addon btn btn-default chooseLive">选择直播</span>
 
         </div>
     </div>
+    
     <!-- <div class="form-group">
 
         <div class="col-sm-2 control-label">视频链接</div>
@@ -25379,6 +25396,19 @@
 
 <script type="text/javascript" src="./diypage/resource/js/icon_diy.js"></script>
 
+<!-- 添加直播 -->
+<script type="text/html" id="tpl_liveid">
+    <div
+      class="drag"
+      data-id="<%id%>"
+    >
+        <div class="cover-image">
+            <img src="<%coverImg%>" />
+        <div>
+        <div class=""></div>
+    </div>
+</script>
+
 <!--初始化自定义组件-->
 
 
@@ -25430,7 +25460,7 @@
         layer.open({
             type:2,
             title:false,
-            area: ['800px','400px'],
+            area: ['1000px','680px'],
             fixed: false,
             maxmin:true,
             content:'/liveLayer.html',
@@ -25438,7 +25468,16 @@
 
             },
             end: function() {
-                console.log(23)
+                var liveId = $('#live_id').val()
+                $.get('/api/enterprise/live/liveDetail',{liveId},function(res){
+                    console.log(res)
+                    if(res.status===200) {
+                        $('#liveId').val(res.data.id).change()
+                        $('#liveName').val(res.data.liveName).change()
+                        $('#channelId').val(res.data.channelId).change()
+                        $('#poster').val(res.data.coverImg).change()
+                    }
+                })
             }
         })
     })
@@ -25472,28 +25511,28 @@
     var id = 336;
 
     
-        var itemdata = JSON.parse('{\"id\":336,\"uniacid\":56,\"index\":1,\"page\":{\"type\":1,\"title\":\"请输入页面标题\",\"name\":\"未命名页面\",\"background\":\"rgb(241, 241, 241)\",\"topbackground\":\"#ffffff\",\"topcolor\":\"1\",\"styledata\":\"0\",\"repeat\":\"\",\"positionx\":\"0\",\"positiony\":\"0\",\"size\":\"0\",\"sizew\":\"20\",\"sizeh\":\"20\",\"visitlevel\":{\"member\":null,\"commission\":null},\"novisit\":[]},\"items\":{\"M1595998937180\":{\"icon\":\"#iconzhufubiaoti\",\"params\":{\"title\":\"主标题\",\"title2\":\"副标题描述\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"style\":\"1\"},\"style\":{\"background\":\"#ffffff\",\"colorz\":\"#434343\",\"colorf\":\"#838383\",\"linecolor\":\"#434343\",\"fontsizez\":\"14\",\"fontsizef\":\"12\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"mt\":\"10\"},\"id\":\"title2\"},\"M1595998940822\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998940822\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940823\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940824\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\"},\"M1595998944852\":{\"icon\":\"#iconfuzhuxian\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"2\",\"background\":\"#ffffff\",\"border\":\"#000000\",\"padding\":\"0\",\"pd\":\"0\",\"linestyle\":\"solid\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"line\"},\"M1595998946380\":{\"icon\":\"#iconfuzhukongbai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"42\",\"background\":\"#ffffff\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"blank\"},\"M1595998948438\":{\"icon\":\"#icontupianlunbo\",\"params\":{\"totle\":2,\"navstyle\":\"1\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"navstyle2\":0},\"style\":{\"dotstyle\":\"round\",\"dotalign\":\"left\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"background\":\"#ffffff\",\"backgroundall\":\"#ffffff\",\"leftright\":\"5\",\"bottom\":\"5\",\"opacity\":\"0.8\",\"text_color\":\"#fff\",\"bg\":\"#000000\",\"jsq_color\":\"red\",\"pdh\":\"0\",\"pdw\":\"0\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"speed\":\"5\"},\"data\":{\"C1595998948438\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"\",\"text\":\"文字描述\"},\"C1595998948439\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"ddddsaasddsa\",\"text\":\"文字描述\"}},\"id\":\"banner\"},\"M1595998985884\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998985884\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985885\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985886\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998968645\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998968645\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968646\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968647\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998971519\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\"},\"M1595998972405\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998972907\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998941499\":{\"icon\":\"#iconzutumokuai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"background\":\"#ffffff\"},\"data\":{\"C1595998941499\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\"}},\"id\":\"picture\"}},\"tpl_name\":\"未命名页面\",\"diyform\":[]}');
-         console.log(itemdata)
-        if(itemdata){
+        // var itemdata = JSON.parse('{\"id\":336,\"uniacid\":56,\"index\":1,\"page\":{\"type\":1,\"title\":\"请输入页面标题\",\"name\":\"未命名页面\",\"background\":\"rgb(241, 241, 241)\",\"topbackground\":\"#ffffff\",\"topcolor\":\"1\",\"styledata\":\"0\",\"repeat\":\"\",\"positionx\":\"0\",\"positiony\":\"0\",\"size\":\"0\",\"sizew\":\"20\",\"sizeh\":\"20\",\"visitlevel\":{\"member\":null,\"commission\":null},\"novisit\":[]},\"items\":{\"M1595998937180\":{\"icon\":\"#iconzhufubiaoti\",\"params\":{\"title\":\"主标题\",\"title2\":\"副标题描述\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"style\":\"1\"},\"style\":{\"background\":\"#ffffff\",\"colorz\":\"#434343\",\"colorf\":\"#838383\",\"linecolor\":\"#434343\",\"fontsizez\":\"14\",\"fontsizef\":\"12\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"mt\":\"10\"},\"id\":\"title2\"},\"M1595998940822\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998940822\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940823\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998940824\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\"},\"M1595998944852\":{\"icon\":\"#iconfuzhuxian\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"2\",\"background\":\"#ffffff\",\"border\":\"#000000\",\"padding\":\"0\",\"pd\":\"0\",\"linestyle\":\"solid\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"line\"},\"M1595998946380\":{\"icon\":\"#iconfuzhukongbai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"height\":\"42\",\"background\":\"#ffffff\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\"},\"id\":\"blank\"},\"M1595998948438\":{\"icon\":\"#icontupianlunbo\",\"params\":{\"totle\":2,\"navstyle\":\"1\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\",\"navstyle2\":0},\"style\":{\"dotstyle\":\"round\",\"dotalign\":\"left\",\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"background\":\"#ffffff\",\"backgroundall\":\"#ffffff\",\"leftright\":\"5\",\"bottom\":\"5\",\"opacity\":\"0.8\",\"text_color\":\"#fff\",\"bg\":\"#000000\",\"jsq_color\":\"red\",\"pdh\":\"0\",\"pdw\":\"0\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"speed\":\"5\"},\"data\":{\"C1595998948438\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"\",\"text\":\"文字描述\"},\"C1595998948439\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\",\"single\":\"ddddsaasddsa\",\"text\":\"文字描述\"}},\"id\":\"banner\"},\"M1595998985884\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998985884\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985885\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998985886\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998968645\":{\"icon\":\"#iconwenzianniu\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"margintop\":\"10\",\"background\":\"#ffffff\",\"sizew\":\"20\",\"paddingleft\":\"10\",\"padding\":\"5\",\"sizeh\":\"20\"},\"data\":{\"C1595998968645\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968646\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"},\"C1595998968647\":{\"text\":\"我的积分\",\"iconclass\":\"\",\"textcolor\":\"#434343\",\"iconcolor\":\"#c0c0c0\",\"linkurl\":\"\"}},\"id\":\"menu2\",\"index\":null},\"M1595998971519\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\"},\"M1595998972405\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998972907\":{\"icon\":\"#icondangeanniu\",\"params\":{\"icon\":\"icon-home\",\"title\":\"查看更多\",\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingleft\":\"10\",\"paddingtop\":\"10\",\"pdz\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"fs\":\"14\",\"background\":\"#ffffff\",\"bordercolor\":\"#7ad4d2\",\"btnbg\":\"#7ad4d2\",\"color\":\"#ffffff\",\"borderradius\":\"5\"},\"id\":\"anniu\",\"index\":null},\"M1595998941499\":{\"icon\":\"#iconzutumokuai\",\"params\":{\"styledata\":\"0\",\"repeat\":\"repeat\",\"positionx\":\"left\",\"positiony\":\"top\",\"size\":\"0\",\"backgroundimg\":\"\"},\"style\":{\"paddingtop\":\"10\",\"paddingleft\":\"10\",\"mt\":\"10\",\"sizew\":\"20\",\"sizeh\":\"20\",\"background\":\"#ffffff\"},\"data\":{\"C1595998941499\":{\"imgurl\":\"\/diypage\/resource\/images\/diypage\/default\/bigimgshow.jpg\",\"linkurl\":\"\"}},\"id\":\"picture\"}},\"tpl_name\":\"未命名页面\",\"diyform\":[]}');
+        //  console.log(itemdata)
+        // if(itemdata){
 
-            if(itemdata.items != ''){
+        //     if(itemdata.items != ''){
 
-                $.each(itemdata.items, function(i, item){
+        //         $.each(itemdata.items, function(i, item){
 
-                    if(item.id == 'contact'){
+        //             if(item.id == 'contact'){
 
-                        item.params.intro = item.params.intro.replace(/<br>/g,"\n");
+        //                 item.params.intro = item.params.intro.replace(/<br>/g,"\n");
 
-                    }
+        //             }
 
-                });
+        //         });
 
-            }else{
-                var itemdata = '';
+        //     }else{
+        //         var itemdata = '';
 
-            }
+        //     }
 
-        }
+        // }
 
         
 
@@ -25530,19 +25569,19 @@
     var obj = query2Object(location.search)
     var id = obj.id
     require([path,tpl,biz,custom],function(modal,tpl,biz,custom){
-        modal.init({
-                        tpl: tpl,
-                        attachurl: "",//{php echo $_W['attachurl_local'];}
-                        id: id,
-                        siteid: '727',
-                        type: 1,
-                        data: itemdata,
-                        // diyform: itemdata.diyform,
-                        companyinfo: {"content":""},
-                        merch: 0,
-                        plugins: {"creditshop":0,"merch":0,"seckill":0,"exchange":0},
-                        shopset: null
-                    });
+        // modal.init({
+        //                 tpl: tpl,
+        //                 attachurl: "",//{php echo $_W['attachurl_local'];}
+        //                 id: id,
+        //                 siteid: '727',
+        //                 type: 1,
+        //                 data: itemdata,
+        //                 // diyform: itemdata.diyform,
+        //                 companyinfo: {"content":""},
+        //                 merch: 0,
+        //                 plugins: {"creditshop":0,"merch":0,"seckill":0,"exchange":0},
+        //                 shopset: null
+        //             });
         if(id) {
             $.get('/api/enterprise/collegeDecoration/getMicroPage',{
                 id:id,
@@ -25691,6 +25730,8 @@
     }
 
 </script>
+
+
 
 <script>
     if(typeof $.fn.tooltip != 'function' || typeof $.fn.tab != 'function' || typeof $.fn.modal != 'function' || typeof $.fn.dropdown != 'function') {
