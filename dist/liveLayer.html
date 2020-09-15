@@ -54,7 +54,7 @@
             </el-pagination>
         </div>
         <div class="mt20 footer">
-            <el-button>取消</el-button>
+            <el-button @click="cancle">取消</el-button>
             <el-button @click="save" type="primary">确定</el-button>
         </div>
     </div>
@@ -105,8 +105,9 @@ var token = localStorage.getItem('token')
             handleSelectionChange(list) {
                 this.selectList = list
             },
-            showTest:function() {
-                console.log(2323)
+            cancle() {
+                var index = parent.layer.getFrameIndex(window.name)
+                parent.layer.close(index);
             },
             save() {
                 var index=parent.layer.getFrameIndex(window.name);

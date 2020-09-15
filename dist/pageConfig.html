@@ -5139,9 +5139,13 @@
 <script type="text/html" id="tpl_show_video">
 
     <div class="drag" data-itemid="<%itemid%>" style="padding:<%style.paddingtop||'0'%>px <%style.paddingleft%>px;background:<%if params.styledata==1%>url(<%params.backgroundimg%>) <%params.positiony%> <%params.positionx%><%/if%> <%style.background%>;<%if params.styledata==1%>background-repeat: <%params.repeat%>;background-size: <%if params.size==1%>cover<%/if%><%if params.size==0%><%style.sizew%>% <%style.sizeh%>%<%/if%>;<%/if%>margin-top: <%style.mt%>px">
-
+        <div class="video-title">
+            <% params.title %>
+        </div>
         <div class="diy-video style<%style.ratio%>" style='background-image: url("<%imgsrc(params.poster) || "./diypage/resource/images/diypage/default/videoplay.png"%>")'></div>
-
+        <div class="video-liveName">
+            <% params.liveName %>
+        </div>
     </div>
 
 </script>
@@ -22325,7 +22329,7 @@
 
     <div class="diy-editor-title font-size-16">
 
-        <span>视频</span>
+        <span>直播</span>
 
     </div>
 
@@ -22644,13 +22648,24 @@
 
     </div> -->
     <div class="form-group">
+        <div class="col-sm-2 control-label">直播标题</div>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <input class="form-control input-sm diy-bind" data-bind-child="params" data-bind="title" data-placeholder="请输入标题1" placeholder="请输入标题" value="<%params.title%>" />
+            </div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="form-group">
         <div class="col-sm-2 control-label">选择直播</div>
         <div class="col-sm-10">
             <div class="input-group">
-                <input placeholder="直播id" class="form-control liveId diy-bind" data-bind-child="params" data-bind="liveId" data-bind-init="true" value="<%params.liveId%>" id="liveId" />
-                <input placeholder="直播名称" class="form-control liveName diy-bind" data-bind-child="params" data-bind="liveName" data-bind-init="true" value="<%params.liveName%>" id="liveName" />
-                <input placeholder="直播id" class="form-control channelId diy-bind" data-bind-child="params" data-bind="channelId" data-bind-init="true" value="<%params.channelId%>" id="channelId" />
-                <input placeholder="直播id" class="form-control channelId diy-bind" data-bind-child="params" data-bind="poster" data-bind-init="true" value="<%params.poster%>" id="poster" />
+                <input placeholder="直播id" disabled class="form-control liveId diy-bind" data-bind-child="params" data-bind="liveId" value="<%params.liveId%>" id="liveId" />
+                <input data-placeholder="请输入直播名称" placeholder="直播名称" disabled class="form-control liveName diy-bind" data-bind-child="params" data-bind="liveName" value="<%params.liveName%>" id="liveName" />
+                <input placeholder="直播id" disabled class="form-control channelId diy-bind" data-bind-child="params" data-bind="channelId" value="<%params.channelId%>" id="channelId" />
+                <input placeholder="直播id" disabled class="form-control channelId diy-bind" data-bind-child="params" data-bind="poster" value="<%params.poster%>" id="poster" />
                 <!-- <%if params.liveId!='' %>
                     <div
                     class="drag"

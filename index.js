@@ -27,6 +27,13 @@ const proxyTable = {
     changeOrigin: true,
     pathRewrite:{
         '^/api':''
+    },
+  },
+  '/polyv':{
+    target: 'http://api.polyv.net',
+    changeOrigin:true,
+    pathRewrite:{
+      '^/polyv':''
     }
   }
 }

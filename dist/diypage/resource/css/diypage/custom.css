@@ -1166,3 +1166,11 @@ table.table-responsive td.defaults{
     display: flex;
     flex-direction: row;
 }
+
+.video-title {
+    padding: 10px 0;
+    font-size: 20px;
+}
+.video-liveName {
+    padding-top: 10px;
+}
